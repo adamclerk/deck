@@ -26,7 +26,7 @@ Debugf statement for use to debug games
 ```go
 func Decks(count int) func(*Options)
 ```
-Decks is a funcational option used to create a shoe with multiple decks.
+Decks is a functional option used to create a shoe with multiple decks.
 
 #### func  Empty
 
@@ -48,7 +48,7 @@ in a created deck.
 ```go
 func FromSignature(sig string) func(*Options)
 ```
-FromSignature is a funcational option used to create decks from a given hex
+FromSignature is a functional option used to create decks from a given hex
 signature
 
 #### func  Seed
@@ -80,8 +80,8 @@ decks are created. This is mostly used for testing.
 ```go
 func WithCards(cards ...Card) func(*Options)
 ```
-WithCards creates a deck with specific cards. Paried witht he Unshuffled option
-and you can stack a deck for testing. With cards takes presedence over Suits and
+WithCards creates a deck with specific cards. Paired with he Unshuffled option
+and you can stack a deck for testing. With cards takes precedence over Suits and
 Faces Options.
 
 #### type Card
@@ -208,7 +208,7 @@ func (d *Deck) ShufflePerm()
 ```
 ShufflePerm uses rand.Perm instead of the many calls to rand.Intn.
 
-    When compared to the current implementeation:
+    When compared to the current implementation:
 
     benchmark                        old ns/op     new ns/op     delta
     BenchmarkTinyDeckShuffle-8       524           537           +2.48%
@@ -217,7 +217,7 @@ ShufflePerm uses rand.Perm instead of the many calls to rand.Intn.
     BenchmarkDeckShuffle-8           2115          2194          +3.74%
     BenchmarkLargeDeckShuffle-8      21301         21408         +0.50%
 
-    Conclusion: Not Recomended
+    Conclusion: Not Recommended
 
 #### func (*Deck) String
 
@@ -250,7 +250,7 @@ const (
 	KING
 )
 ```
-Contants for Face
+Constants for Face
 
 #### type Options
 
@@ -273,7 +273,7 @@ Options is the struct used to describe now a Deck should be created
 type Suit int
 ```
 
-Suit represents the suit of the card (spade, heart, diamon, club)
+Suit represents the suit of the card (spade, heart, diamond, club)
 
 ```go
 const (
@@ -283,4 +283,4 @@ const (
 	SPADE
 )
 ```
-Contants for Suit ♠♥♦♣
+Constants for Suit ♠♥♦♣

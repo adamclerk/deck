@@ -107,7 +107,7 @@ func (w *War) PlayerHandEmpty() bool {
 	return w.player1.hand.NumberOfCards() == 0 || w.player2.hand.NumberOfCards() == 0
 }
 
-// Winner annouces the winner
+// Winner announces the winner
 func (w *War) Winner() []Player {
 	return []Player{*w.winner}
 }

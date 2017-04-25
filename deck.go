@@ -53,15 +53,15 @@ func Seed() {
 }
 
 // WithCards creates a deck with specific cards.
-// Paried witht he Unshuffled option and you can stack a deck for testing.
-// With cards takes presedence over Suits and Faces Options.
+// Paired with he Unshuffled option and you can stack a deck for testing.
+// With cards takes precedence over Suits and Faces Options.
 func WithCards(cards ...Card) func(*Options) {
 	return func(o *Options) {
 		o.Cards = cards
 	}
 }
 
-// Decks is a funcational option used to create a shoe with multiple decks.
+// Decks is a functional option used to create a shoe with multiple decks.
 func Decks(count int) func(*Options) {
 	return func(o *Options) {
 		o.Decks = count
@@ -94,7 +94,7 @@ func Faces(faces ...Face) func(*Options) {
 	}
 }
 
-// FromSignature is a funcational option used to create decks from a given hex signature
+// FromSignature is a functional option used to create decks from a given hex signature
 func FromSignature(sig string) func(*Options) {
 	return func(o *Options) {
 		o.Signature = sig
@@ -136,7 +136,7 @@ func (d *Deck) Shuffle() {
 }
 
 // ShufflePerm uses rand.Perm instead of the many calls to rand.Intn.
-//  When compared to the current implementeation:
+//  When compared to the current implementation:
 //
 //  benchmark                        old ns/op     new ns/op     delta
 //  BenchmarkTinyDeckShuffle-8       524           537           +2.48%
@@ -145,7 +145,7 @@ func (d *Deck) Shuffle() {
 //  BenchmarkDeckShuffle-8           2115          2194          +3.74%
 //  BenchmarkLargeDeckShuffle-8      21301         21408         +0.50%
 //
-//  Conclusion: Not Recomended
+//  Conclusion: Not Recommended
 func (d *Deck) ShufflePerm() {
 	N := len(d.Cards)
 	perm := rand.Perm(N)

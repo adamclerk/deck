@@ -2,13 +2,13 @@ package deck
 
 import "fmt"
 
-// Suit represents the suit of the card (spade, heart, diamon, club)
+// Suit represents the suit of the card (spade, heart, diamond, club)
 type Suit int
 
 // Face represents the face of the card (ace, two...queen, king)
 type Face int
 
-// Contants for Suit ♠♥♦♣
+// Constants for Suit ♠♥♦♣
 const (
 	CLUB Suit = iota
 	DIAMOND
@@ -16,7 +16,7 @@ const (
 	SPADE
 )
 
-// Contants for Face
+// Constants for Face
 const (
 	ACE Face = iota
 	TWO
