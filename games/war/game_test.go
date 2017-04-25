@@ -10,10 +10,10 @@ import (
 
 func TestWarGameStandStillFewCards(t *testing.T) {
 	cards := []deck.Card{
-		deck.Card{Face: deck.ACE, Suit: deck.HEART},
-		deck.Card{Face: deck.ACE, Suit: deck.SPADE},
-		deck.Card{Face: deck.ACE, Suit: deck.DIAMOND},
-		deck.Card{Face: deck.ACE, Suit: deck.CLUB},
+		deck.NewCard(deck.ACE, deck.HEART),
+		deck.NewCard(deck.ACE, deck.SPADE),
+		deck.NewCard(deck.ACE, deck.DIAMOND),
+		deck.NewCard(deck.ACE, deck.CLUB),
 	}
 	game, _ := New(
 		WithDeck(
@@ -28,12 +28,12 @@ func TestWarGameStandStillFewCards(t *testing.T) {
 
 func TestWarGameStandStill(t *testing.T) {
 	cards := []deck.Card{
-		deck.Card{Face: deck.ACE, Suit: deck.HEART},
-		deck.Card{Face: deck.ACE, Suit: deck.SPADE},
-		deck.Card{Face: deck.ACE, Suit: deck.DIAMOND},
-		deck.Card{Face: deck.ACE, Suit: deck.CLUB},
-		deck.Card{Face: deck.TWO, Suit: deck.DIAMOND},
-		deck.Card{Face: deck.TWO, Suit: deck.CLUB},
+		deck.NewCard(deck.ACE, deck.HEART),
+		deck.NewCard(deck.ACE, deck.SPADE),
+		deck.NewCard(deck.ACE, deck.DIAMOND),
+		deck.NewCard(deck.ACE, deck.CLUB),
+		deck.NewCard(deck.TWO, deck.DIAMOND),
+		deck.NewCard(deck.TWO, deck.CLUB),
 	}
 	game, _ := New(
 		WithDeck(
@@ -48,8 +48,8 @@ func TestWarGameStandStill(t *testing.T) {
 
 func TestWarGameSimple(t *testing.T) {
 	cards := []deck.Card{
-		deck.Card{Face: deck.ACE, Suit: deck.HEART},
-		deck.Card{Face: deck.TWO, Suit: deck.SPADE},
+		deck.NewCard(deck.ACE, deck.HEART),
+		deck.NewCard(deck.TWO, deck.SPADE),
 	}
 	game, _ := New(
 		WithDeck(
@@ -65,12 +65,12 @@ func TestWarGameSimple(t *testing.T) {
 
 func TestWarGameWithOneWar(t *testing.T) {
 	cards := []deck.Card{
-		deck.Card{Face: deck.ACE, Suit: deck.HEART},
-		deck.Card{Face: deck.ACE, Suit: deck.SPADE},
-		deck.Card{Face: deck.ACE, Suit: deck.HEART},
-		deck.Card{Face: deck.ACE, Suit: deck.SPADE},
-		deck.Card{Face: deck.TWO, Suit: deck.HEART},
-		deck.Card{Face: deck.ACE, Suit: deck.SPADE},
+		deck.NewCard(deck.ACE, deck.HEART),
+		deck.NewCard(deck.ACE, deck.SPADE),
+		deck.NewCard(deck.ACE, deck.HEART),
+		deck.NewCard(deck.ACE, deck.SPADE),
+		deck.NewCard(deck.TWO, deck.HEART),
+		deck.NewCard(deck.ACE, deck.SPADE),
 	}
 	game, _ := New(
 		WithDeck(

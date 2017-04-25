@@ -9,12 +9,12 @@ import (
 // This example uses a stacked deck to get a specific result
 func Example() {
 	cards := []deck.Card{
-		deck.Card{Face: deck.ACE, Suit: deck.HEART},
-		deck.Card{Face: deck.ACE, Suit: deck.SPADE},
-		deck.Card{Face: deck.ACE, Suit: deck.HEART},
-		deck.Card{Face: deck.ACE, Suit: deck.SPADE},
-		deck.Card{Face: deck.TWO, Suit: deck.HEART},
-		deck.Card{Face: deck.ACE, Suit: deck.SPADE},
+		deck.NewCard(deck.ACE, deck.HEART),
+		deck.NewCard(deck.ACE, deck.SPADE),
+		deck.NewCard(deck.ACE, deck.HEART),
+		deck.NewCard(deck.ACE, deck.SPADE),
+		deck.NewCard(deck.TWO, deck.HEART),
+		deck.NewCard(deck.ACE, deck.SPADE),
 	}
 	game, err := New(WithDeck(deck.Unshuffled, deck.WithCards(cards...)))
 	if err != nil {
@@ -29,8 +29,8 @@ func Example() {
 }
 
 func ExampleCompare() {
-	card1 := deck.Card{Face: deck.TWO, Suit: deck.SPADE}
-	card2 := deck.Card{Face: deck.THREE, Suit: deck.HEART}
+	card1 := deck.NewCard(deck.TWO, deck.SPADE)
+	card2 := deck.NewCard(deck.THREE, deck.HEART)
 
 	result1 := Compare(card1, card2)
 	result2 := Compare(card2, card1)
@@ -47,12 +47,12 @@ func ExampleCompare() {
 
 func ExampleDebug() {
 	cards := []deck.Card{
-		deck.Card{Face: deck.ACE, Suit: deck.HEART},
-		deck.Card{Face: deck.ACE, Suit: deck.SPADE},
-		deck.Card{Face: deck.ACE, Suit: deck.HEART},
-		deck.Card{Face: deck.ACE, Suit: deck.SPADE},
-		deck.Card{Face: deck.TWO, Suit: deck.HEART},
-		deck.Card{Face: deck.ACE, Suit: deck.SPADE},
+		deck.NewCard(deck.ACE, deck.HEART),
+		deck.NewCard(deck.ACE, deck.SPADE),
+		deck.NewCard(deck.ACE, deck.HEART),
+		deck.NewCard(deck.ACE, deck.SPADE),
+		deck.NewCard(deck.TWO, deck.HEART),
+		deck.NewCard(deck.ACE, deck.SPADE),
 	}
 	game, err := New(Debug, WithDeck(deck.Unshuffled, deck.WithCards(cards...)))
 	if err != nil {
@@ -92,12 +92,12 @@ func ExampleMaxTurns() {
 
 func ExampleWithDeck() {
 	cards := []deck.Card{
-		deck.Card{Face: deck.ACE, Suit: deck.HEART},
-		deck.Card{Face: deck.ACE, Suit: deck.SPADE},
-		deck.Card{Face: deck.ACE, Suit: deck.HEART},
-		deck.Card{Face: deck.ACE, Suit: deck.SPADE},
-		deck.Card{Face: deck.TWO, Suit: deck.HEART},
-		deck.Card{Face: deck.ACE, Suit: deck.SPADE},
+		deck.NewCard(deck.ACE, deck.HEART),
+		deck.NewCard(deck.ACE, deck.SPADE),
+		deck.NewCard(deck.ACE, deck.HEART),
+		deck.NewCard(deck.ACE, deck.SPADE),
+		deck.NewCard(deck.TWO, deck.HEART),
+		deck.NewCard(deck.ACE, deck.SPADE),
 	}
 
 	game, _ := New(WithDeck(deck.WithCards(cards...), deck.Unshuffled))

@@ -4,6 +4,7 @@ package deck
 import (
 	"fmt"
 	"math/rand"
+	"strconv"
 	"time"
 )
 
@@ -25,16 +26,22 @@ type Options struct {
 
 // New creates a new deck based on Options
 func New(options ...func(*Options)) (*Deck, error) {
-	opt := Options{Shuffled: true, Faces: FACES, Suits: SUITS, Decks: 1, Cards: []Card{}}
+	opt := Options{Shuffled: true, Faces: FACES, Suits: SUITS, Decks: 1, Cards: []Card{}, Signature: ""}
 	for _, option := range options {
 		option(&opt)
 	}
+
 	cards := opt.Cards
+
+	if opt.Signature != "" {
+		convertSignature(opt.Signature, &cards)
+	}
+
 	if len(cards) == 0 {
 		for i := 0; i < opt.Decks; i++ {
 			for _, suit := range opt.Suits {
 				for _, face := range opt.Faces {
-					cards = append(cards, Card{face, suit})
+					cards = append(cards, NewCard(face, suit))
 				}
 			}
 		}
@@ -167,25 +174,34 @@ func (d *Deck) GetSignature() string {
 	return sig
 }
 
+func convertSignature(sig string, cards *[]Card) {
+	for i := 0; i < len(sig)-1; i = i + 2 {
+		face, _ := strconv.ParseInt("0x"+string(sig[i]), 0, 8)
+		suit, _ := strconv.ParseInt("0x"+string(sig[i+1]), 0, 8)
+		*cards = append(*cards, NewCard(Face(face), Suit(suit)))
+	}
+	// return cards
+}
+
 // CompareResult is the custom type returned when comparing cards
 type CompareResult int
 
 // DefaultCompare is the default comparison function
 // Currently not used in any games.
 func DefaultCompare(i, j Card) CompareResult {
-	if i.Face > j.Face {
+	if i.Face() > j.Face() {
 		return 1
 	}
 
-	if i.Face < j.Face {
+	if i.Face() < j.Face() {
 		return -1
 	}
 
-	if i.Suit > j.Suit {
+	if i.Suit() > j.Suit() {
 		return 1
 	}
 
-	if i.Suit < j.Suit {
+	if i.Suit() < j.Suit() {
 		return -1
 	}
 

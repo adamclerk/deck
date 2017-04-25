@@ -40,14 +40,11 @@ var (
 )
 
 // Card represents a playing card with a Face and a Suit
-type Card struct {
-	Face Face
-	Suit Suit
-}
+type Card int
 
 func (c Card) String() string {
 	face := ""
-	switch c.Face {
+	switch c.Face() {
 	case 0:
 		face = "A"
 	case 1:
@@ -76,7 +73,7 @@ func (c Card) String() string {
 		face = "K"
 	}
 	suit := ""
-	switch c.Suit {
+	switch c.Suit() {
 	case 0:
 		suit = "♣"
 	case 1:
@@ -89,7 +86,22 @@ func (c Card) String() string {
 	return fmt.Sprintf("%s%s", face, suit)
 }
 
+// Face is a utility function to get the face of a card
+func (c Card) Face() int {
+	return int(c / 4)
+}
+
+// Suit is a utility function to get the suit of a card
+func (c Card) Suit() int {
+	return int(c % 4)
+}
+
+// NewCard creates a new card with a face and suit
+func NewCard(face Face, suit Suit) Card {
+	return Card(int(face)*4 + int(suit))
+}
+
 // GetSignature is the hex representation of the Face and Suit of the card
 func (c *Card) GetSignature() string {
-	return fmt.Sprintf("%x%x", c.Face, c.Suit)
+	return fmt.Sprintf("%x%x", c.Face(), c.Suit())
 }

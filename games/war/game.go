@@ -149,11 +149,11 @@ func Debug(o *Options) {
 // returns  -1 if it's lesser.
 // returns 0 of equal.
 func Compare(i, j deck.Card) deck.CompareResult {
-	if i.Face > j.Face {
+	if i.Face() > j.Face() {
 		return 1
 	}
 
-	if i.Face < j.Face {
+	if i.Face() < j.Face() {
 		return -1
 	}
 

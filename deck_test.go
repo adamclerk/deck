@@ -9,7 +9,7 @@ import (
 
 func TestSmallDeckToString(t *testing.T) {
 	deck, _ := New(Empty)
-	deck.Cards = append(deck.Cards, Card{ACE, HEART}, Card{KING, HEART})
+	deck.Cards = append(deck.Cards, NewCard(ACE, HEART), NewCard(KING, HEART))
 	result := fmt.Sprintf("%s", deck)
 	assert.Equal(t, "A♥\nK♥\n", result, "These should be equal")
 }
@@ -23,9 +23,15 @@ func TestDeckToString(t *testing.T) {
 		"A♠\n2♠\n3♠\n4♠\n5♠\n6♠\n7♠\n8♠\n9♠\nT♠\nJ♠\nQ♠\nK♠\n", result, "These should be equal")
 }
 
+func TestDeckFromSignature(t *testing.T) {
+	deck, _ := New(FromSignature("02c290"), Unshuffled)
+	result := fmt.Sprintf("%s", deck)
+	assert.Equal(t, "A♥\nK♥\nT♣\n", result, "These should be equal")
+}
+
 func TestDeckSignature(t *testing.T) {
 	deck, _ := New(Empty)
-	deck.Cards = append(deck.Cards, Card{ACE, HEART}, Card{KING, HEART}, Card{TEN, CLUB})
+	deck.Cards = append(deck.Cards, NewCard(ACE, HEART), NewCard(KING, HEART), NewCard(TEN, CLUB))
 	result := deck.GetSignature()
 	assert.Equal(t, "02c290", result, "These should be equal")
 }
@@ -75,10 +81,10 @@ func TestShufflePerm(t *testing.T) {
 
 func TestWithCards(t *testing.T) {
 	cards := []Card{
-		Card{ACE, HEART},
-		Card{ACE, SPADE},
-		Card{ACE, DIAMOND},
-		Card{ACE, CLUB},
+		NewCard(ACE, HEART),
+		NewCard(ACE, SPADE),
+		NewCard(ACE, DIAMOND),
+		NewCard(ACE, CLUB),
 	}
 	deck, _ := New(WithCards(cards...), Unshuffled)
 	assert.Equal(t, deck.NumberOfCards(), 4)
@@ -110,24 +116,29 @@ func BenchmarkMediumDeckShuffle(b *testing.B) {
 }
 
 func BenchmarkDeckShuffle(b *testing.B) {
-	deck, _ := New(Unshuffled, Faces(FACES...), Suits(SUITS...))
+	b.ReportAllocs()
 	for n := 0; n < b.N; n++ {
+		deck, _ := New(Unshuffled, Faces(FACES...), Suits(SUITS...))
 		deck.Shuffle()
 	}
 }
 func BenchmarkLargeDeckShuffle(b *testing.B) {
-	deck, _ := New(Unshuffled, Decks(10), Faces(FACES...), Suits(SUITS...))
+	b.ReportAllocs()
 	for n := 0; n < b.N; n++ {
+		deck, _ := New(Unshuffled, Decks(10), Faces(FACES...), Suits(SUITS...))
 		deck.Shuffle()
 	}
 }
-func BenchmarkLargeDeckShuffleAlt(b *testing.B) {
-	deck, _ := New(Unshuffled, Decks(10), Faces(FACES...), Suits(SUITS...))
-	for n := 0; n < b.N; n++ {
-		deck.ShufflePerm()
-	}
-}
+
+// func BenchmarkLargeDeckShuffleAlt(b *testing.B) {
+// 	b.ReportAllocs()
+// 	deck, _ := New(Unshuffled, Decks(10), Faces(FACES...), Suits(SUITS...))
+// 	for n := 0; n < b.N; n++ {
+// 		deck.ShufflePerm()
+// 	}
+// }
 func TestShoeToString(t *testing.T) {
+
 	shoe, _ := New(Unshuffled, Decks(1))
 	result := fmt.Sprintf("%s", shoe)
 	assert.Equal(t, "A♣\n2♣\n3♣\n4♣\n5♣\n6♣\n7♣\n8♣\n9♣\nT♣\nJ♣\nQ♣\nK♣\nA♦\n2♦\n3♦\n4♦\n5♦\n6♦\n7♦\n8♦\n9♦\nT♦\nJ♦\nQ♦\nK♦\nA♥\n2♥\n3♥\n4♥\n5♥\n6♥\n7♥\n8♥\n9♥\nT♥\nJ♥\nQ♥\nK♥\nA♠\n2♠\n3♠\n4♠\n5♠\n6♠\n7♠\n8♠\n9♠\nT♠\nJ♠\nQ♠\nK♠\n", result, "These should be equal")

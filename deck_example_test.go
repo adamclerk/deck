@@ -57,7 +57,7 @@ func ExampleSuits() {
 	// K♥
 }
 
-// With unshuffled you allways get the same card in a given position in the deck.
+// With unshuffled you always get the same card in a given position in the deck.
 func ExampleUnshuffled() {
 	deck, _ := New(Unshuffled)
 
@@ -71,7 +71,7 @@ func ExampleUnshuffled() {
 }
 
 func ExampleWithCards() {
-	deck, _ := New(WithCards(Card{Face: ACE, Suit: HEART}, Card{Face: ACE, Suit: DIAMOND}), Unshuffled)
+	deck, _ := New(WithCards(NewCard(ACE, HEART), NewCard(ACE, DIAMOND)), Unshuffled)
 
 	fmt.Printf("Card Count: %d\n", deck.NumberOfCards())
 	fmt.Printf("%s", deck)
