@@ -95,22 +95,25 @@ func TestWithCards(t *testing.T) {
 }
 
 func BenchmarkTinyDeckShuffle(b *testing.B) {
-	deck, _ := New(Unshuffled, Suits(SPADE))
+	b.ReportAllocs()
 	for n := 0; n < b.N; n++ {
+		deck, _ := New(Unshuffled, Suits(SPADE))
 		deck.Shuffle()
 	}
 }
 
 func BenchmarkSmallDeckShuffle(b *testing.B) {
-	deck, _ := New(Unshuffled, Faces(FACES...), Suits(SPADE, HEART))
+	b.ReportAllocs()
 	for n := 0; n < b.N; n++ {
+		deck, _ := New(Unshuffled, Faces(FACES...), Suits(SPADE, HEART))
 		deck.Shuffle()
 	}
 }
 
 func BenchmarkMediumDeckShuffle(b *testing.B) {
-	deck, _ := New(Unshuffled, Faces(FACES...), Suits(SPADE, HEART, DIAMOND))
+	b.ReportAllocs()
 	for n := 0; n < b.N; n++ {
+		deck, _ := New(Unshuffled, Faces(FACES...), Suits(SPADE, HEART, DIAMOND))
 		deck.Shuffle()
 	}
 }
@@ -137,6 +140,7 @@ func BenchmarkLargeDeckShuffle(b *testing.B) {
 // 		deck.ShufflePerm()
 // 	}
 // }
+
 func TestShoeToString(t *testing.T) {
 
 	shoe, _ := New(Unshuffled, Decks(1))

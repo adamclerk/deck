@@ -38,10 +38,13 @@ func New(options ...func(*Options)) (*Deck, error) {
 	}
 
 	if len(cards) == 0 {
+		cards = make([]Card, len(opt.Suits)*len(opt.Faces)*opt.Decks)
+		index := 0
 		for i := 0; i < opt.Decks; i++ {
 			for _, suit := range opt.Suits {
 				for _, face := range opt.Faces {
-					cards = append(cards, NewCard(face, suit))
+					cards[index] = NewCard(face, suit)
+					index++
 				}
 			}
 		}
@@ -176,8 +179,8 @@ func (d *Deck) GetSignature() string {
 
 func convertSignature(sig string, cards *[]Card) {
 	for i := 0; i < len(sig)-1; i = i + 2 {
-		face, _ := strconv.ParseInt("0x"+string(sig[i]), 0, 8)
-		suit, _ := strconv.ParseInt("0x"+string(sig[i+1]), 0, 8)
+		face, _ := strconv.ParseInt(string(sig[i]), 16, 8)
+		suit, _ := strconv.ParseInt(string(sig[i+1]), 16, 8)
 		*cards = append(*cards, NewCard(Face(face), Suit(suit)))
 	}
 	// return cards
