@@ -23,7 +23,7 @@ func TestCardCompare(t *testing.T) {
 	card1 := NewCard(ACE, HEART)
 	card2 := NewCard(KING, HEART)
 	result := DefaultCompare(card1, card2)
-	assert.Equal(t, -1, result, "These should be equal")
+	assert.Equal(t, CompareResult(-1), result, "These should be equal")
 }
 
 func TestCardIsLessThan(t *testing.T) {
